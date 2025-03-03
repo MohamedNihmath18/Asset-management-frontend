@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:5000/api/assets"; // Change if backend URL differs
+const API_URL = "https://asset-management-backend-vegp.onrender.com/api/assets"; // Change if backend URL differs
 
 // Create a new asset
 export const createAsset = async (formData) => {

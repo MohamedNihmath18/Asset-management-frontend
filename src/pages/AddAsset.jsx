@@ -57,7 +57,7 @@ const AddAsset = () => {
     });
 
     try {
-      await axios.post("http://localhost:5000/api/assets/create", data);
+      await axios.post("https://asset-management-backend-vegp.onrender.com/api/assets/create", data);
       alert("Asset added successfully!");
       navigate("/");
     } catch (error) {

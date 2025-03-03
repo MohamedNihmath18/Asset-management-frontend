@@ -11,7 +11,7 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:5000/api/auth/login", { email, password });
+      const response = await axios.post("https://asset-management-backend-vegp.onrender.com/api/auth/login", { email, password });
       localStorage.setItem("token", response.data.token);
       navigate("/"); // Redirect to dashboard after login
     } catch (err) {

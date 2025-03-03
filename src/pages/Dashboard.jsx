@@ -15,7 +15,7 @@ const Dashboard = () => {
     // Fetch all assets
     const fetchAssets = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/assets");
+        const response = await axios.get("https://asset-management-backend-vegp.onrender.com/api/assets");
         setAssets(response.data.assets.slice(0, 5)); // Show only recent 5
         setTotalAssets(response.data.assets.length);
       } catch (error) {

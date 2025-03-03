@@ -15,7 +15,7 @@ const AssetDetails = () => {
   useEffect(() => {
     const fetchAsset = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/assets/${id}`);
+        const response = await axios.get(`https://asset-management-backend-vegp.onrender.com/api/assets/${id}`);
         setAsset(response.data.asset);
       } catch (error) {
         console.error("Error fetching asset details:", error);
@@ -97,7 +97,7 @@ const downloadPDF = async () => {
           {Object.entries(asset.documents || {}).map(([key, value]) =>
             value ? (
               <p key={key}>
-                <a href={`http://localhost:5000/${value}`} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
+                <a href={`https://asset-management-backend-vegp.onrender.com/${value}`} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
                   {key.toUpperCase()}
                 </a>
               </p>

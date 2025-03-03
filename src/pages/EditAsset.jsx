@@ -39,7 +39,7 @@ const EditAsset = () => {
   useEffect(() => {
     const fetchAsset = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/assets/${id}`);
+        const response = await axios.get(`https://asset-management-backend-vegp.onrender.com/api/assets/${id}`);
         const assetData = response.data.asset;
 
         // ✅ Convert warrantyStartDate to "YYYY-MM-DD" format
@@ -80,7 +80,7 @@ const EditAsset = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`http://localhost:5000/api/assets/${id}`, formData);
+      await axios.put(`https://asset-management-backend-vegp.onrender.com/api/assets/${id}`, formData);
       alert("Asset updated successfully!");
       navigate("/");
     } catch (error) {

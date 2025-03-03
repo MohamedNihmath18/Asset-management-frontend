@@ -14,7 +14,7 @@ const AssetList = () => {
   useEffect(() => {
     const fetchAssets = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/assets");
+        const response = await axios.get("https://asset-management-backend-vegp.onrender.com/api/assets");
         setAssets(Array.isArray(response.data.assets) ? response.data.assets : []);
       } catch (error) {
         console.error("Error fetching assets:", error);
@@ -30,7 +30,7 @@ const AssetList = () => {
     if (!window.confirm("Are you sure you want to delete this asset?")) return;
 
     try {
-      await axios.delete(`http://localhost:5000/api/assets/${id}`);
+      await axios.delete(`https://asset-management-backend-vegp.onrender.com/api/assets/${id}`);
       setAssets(assets.filter((asset) => asset._id !== id));
       alert("Asset deleted successfully!");
     } catch (error) {

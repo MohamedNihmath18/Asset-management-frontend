@@ -64,7 +64,9 @@ const Dashboard = () => {
                     <td className="py-2 px-4">{asset.equipmentName}</td>
                     <td className="py-2 px-4">{asset.assetNo}</td>
                     <td className="py-2 px-4">{asset.department}</td>
-                    <td className="py-2 px-4">{asset.equipmentType}</td>
+                    <td className="py-2 px-4">
+          {asset.equipmentType ? asset.equipmentType : "Not Specified"}
+        </td>
                   </tr>
                 ))
               ) : (

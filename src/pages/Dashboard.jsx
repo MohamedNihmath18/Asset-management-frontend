@@ -105,18 +105,26 @@ const Dashboard = () => {
   const [assets, setAssets] = useState([]);
   const [totalAssets, setTotalAssets] = useState(0);
   const [totalAmount, setTotalAmount] = useState(0);
+  const [departmentTotals, setDepartmentTotals] = useState({});
+  const [selectedDepartment, setSelectedDepartment] = useState("All");
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Fetch all assets
     const fetchAssets = async () => {
       try {
         const response = await axios.get("https://asset-management-backend-vegp.onrender.com/api/assets");
         const fetchedAssets = response.data.assets;
-        setAssets(fetchedAssets.slice(0, 5)); // Show only recent 5
+        setAssets(fetchedAssets.slice(0, 5));
         setTotalAssets(fetchedAssets.length);
+
         const amount = fetchedAssets.reduce((acc, asset) => acc + (asset.totalAmount || 0), 0);
         setTotalAmount(amount);
+
+        const totalsByDepartment = fetchedAssets.reduce((acc, asset) => {
+          acc[asset.department] = (acc[asset.department] || 0) + (asset.totalAmount || 0);
+          return acc;
+        }, {});
+        setDepartmentTotals(totalsByDepartment);
       } catch (error) {
         console.error("Error fetching assets:", error);
       }
@@ -124,6 +132,10 @@ const Dashboard = () => {
 
     fetchAssets();
   }, []);
+
+  const filteredAmount = selectedDepartment === "All"
+    ? totalAmount
+    : departmentTotals[selectedDepartment] || 0;
 
   return (
     <div className="p-4 md:p-6 max-w-5xl mx-auto">
@@ -140,6 +152,24 @@ const Dashboard = () => {
           <h2 className="text-lg font-semibold">Total Amount</h2>
           <p className="text-2xl font-bold mt-2">${totalAmount.toLocaleString()}</p>
         </div>
+      </div>
+
+      {/* Total Equipment Value by Department */}
+      <div className="mt-8 bg-white shadow-lg p-4 rounded-lg">
+        <h2 className="text-xl font-semibold text-gray-700">📊 Total Equipment Value by Department</h2>
+        <div className="mt-4">
+          <select
+            value={selectedDepartment}
+            onChange={(e) => setSelectedDepartment(e.target.value)}
+            className="border border-gray-300 p-2 rounded-md w-full md:w-auto"
+          >
+            <option value="All">All Departments</option>
+            {Object.keys(departmentTotals).map((dept) => (
+              <option key={dept} value={dept}>{dept}</option>
+            ))}
+          </select>
+        </div>
+        <p className="text-2xl font-bold mt-4">${filteredAmount.toLocaleString()}</p>
       </div>
 
       {/* Recent Assets */}
@@ -199,4 +229,3 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
-

@@ -41,9 +41,14 @@ const AssetList = () => {
   };
 
   // Filtered assets based on search term and selected field
+  // const filteredAssets = assets.filter((asset) =>
+  //   asset[searchField]?.toLowerCase().includes(searchTerm.toLowerCase())
+  // );
+
   const filteredAssets = assets.filter((asset) =>
-    asset[searchField]?.toLowerCase().includes(searchTerm.toLowerCase())
+    asset[searchField]?.toString().toLowerCase().includes(searchTerm.toLowerCase()) // ✅ Convert to string
   );
+  
 
   return (
     <div className="p-4 md:p-6 max-w-5xl mx-auto">
@@ -91,7 +96,7 @@ const AssetList = () => {
                     <td className="border p-2">{asset.equipmentName}</td>
                     <td className="border p-2">{asset.assetNo}</td>
                     <td className="border p-2">{asset.department}</td>
-                    <td className="border p-2">{asset.equipmentType}</td>
+                    <td className="border p-2">{asset.equipmentType || "N/A"}</td>
                     <td className="border p-2 flex items-center justify-center gap-2 md:gap-4">
                       <button
                         onClick={() => navigate(`/asset/${asset._id}`)}

@@ -101,6 +101,7 @@ const AddAsset = () => {
             ["Dr Incharge Name", "drInchargeName"],
             ["Purpose Of Equipment", "purposeOfEquipment"],
             ["Requested By", "requestedBy"],
+            ["Equipment Type", "equipmentType"],
           ].map(([label, name, type = "text"]) => (
             <div key={name}>
               <label className="block font-medium">{label}</label>
@@ -112,8 +113,18 @@ const AddAsset = () => {
                 className="w-full border p-2 rounded-md focus:ring focus:ring-blue-200"
                 required
               />
+              <select
+              name="equipmentType"
+              value={formData.equipmentType}
+              onChange={handleChange}
+              className="w-full border p-2 rounded-md focus:ring focus:ring-blue-200"
+              required
+            >
+              <option value="critical">Critical</option>
+              <option value="non-critical">Non-Critical</option>
+            </select>
 
-              {/* Equipment Type */}
+              {/* Equipment Type
         <div>
             <label className="block font-medium">Equipment Type</label>
             <select
@@ -126,7 +137,7 @@ const AddAsset = () => {
               <option value="critical">Critical</option>
               <option value="non-critical">Non-Critical</option>
             </select>
-          </div>
+          </div> */}
             </div>
           ))}
         </div>

@@ -1,4 +1,4 @@
-
+ 
 
 import { useState } from "react";
 import axios from "axios";
@@ -101,7 +101,6 @@ const AddAsset = () => {
             ["Dr Incharge Name", "drInchargeName"],
             ["Purpose Of Equipment", "purposeOfEquipment"],
             ["Requested By", "requestedBy"],
-
           ].map(([label, name, type = "text"]) => (
             <div key={name}>
               <label className="block font-medium">{label}</label>
@@ -113,14 +112,12 @@ const AddAsset = () => {
                 className="w-full border p-2 rounded-md focus:ring focus:ring-blue-200"
                 required
               />
-
-              {/* 
-              Equipment Type */}
-
             </div>
           ))}
+        </div>
 
-          <div>
+        {/* Equipment Type */}
+        <div>
             <label className="block font-medium">Equipment Type</label>
             <select
               name="equipmentType"
@@ -133,9 +130,6 @@ const AddAsset = () => {
               <option value="non-critical">Non-Critical</option>
             </select>
           </div>
-        </div>
-
-
 
         {/* File Uploads */}
         <div className="mt-6">

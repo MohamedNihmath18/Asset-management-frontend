@@ -95,7 +95,6 @@
 // };
 
 // export default Dashboard;
-
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -104,7 +103,7 @@ import { PlusCircle, List } from "lucide-react";
 const Dashboard = () => {
   const [assets, setAssets] = useState([]);
   const [totalAssets, setTotalAssets] = useState(0);
-  const [totalAmount, setTotalAmount] = useState(0);
+  const [departmentValues, setDepartmentValues] = useState({});
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -112,11 +111,16 @@ const Dashboard = () => {
     const fetchAssets = async () => {
       try {
         const response = await axios.get("https://asset-management-backend-vegp.onrender.com/api/assets");
-        const fetchedAssets = response.data.assets;
-        setAssets(fetchedAssets.slice(0, 5)); // Show only recent 5
-        setTotalAssets(fetchedAssets.length);
-        const amount = fetchedAssets.reduce((acc, asset) => acc + (asset.totalAmount || 0), 0);
-        setTotalAmount(amount);
+        const allAssets = response.data.assets;
+        setAssets(allAssets.slice(0, 5)); // Show only recent 5
+        setTotalAssets(allAssets.length);
+
+        // Calculate total value by department
+        const departmentTotals = allAssets.reduce((acc, asset) => {
+          acc[asset.department] = (acc[asset.department] || 0) + asset.totalAmount;
+          return acc;
+        }, {});
+        setDepartmentValues(departmentTotals);
       } catch (error) {
         console.error("Error fetching assets:", error);
       }
@@ -136,9 +140,24 @@ const Dashboard = () => {
           <h2 className="text-lg font-semibold">Total Assets</h2>
           <p className="text-2xl font-bold mt-2">{totalAssets}</p>
         </div>
-        <div className="bg-white shadow-lg p-4 rounded-xl border-l-4 border-green-600">
-          <h2 className="text-lg font-semibold">Total Amount</h2>
-          <p className="text-2xl font-bold mt-2">${totalAmount.toLocaleString()}</p>
+      </div>
+
+      {/* Total Equipment Value by Department */}
+      <div className="mt-8">
+        <h2 className="text-xl font-semibold text-gray-700">Total Equipment Value by Department</h2>
+        <div className="bg-white shadow-md rounded-lg mt-4 p-4">
+          {Object.entries(departmentValues).length > 0 ? (
+            <ul>
+              {Object.entries(departmentValues).map(([department, value]) => (
+                <li key={department} className="flex justify-between py-2 border-b">
+                  <span className="font-medium">{department}</span>
+                  <span className="text-blue-600 font-bold">${value.toLocaleString()}</span>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className="text-center text-gray-500">No assets found</p>
+          )}
         </div>
       </div>
 
@@ -159,10 +178,10 @@ const Dashboard = () => {
             <tbody>
               {assets.length > 0 ? (
                 assets.map((asset, index) => (
-                  <tr 
-                    key={asset._id} 
+                  <tr
+                    key={asset._id}
                     className="border-b cursor-pointer hover:bg-gray-100 transition duration-150"
-                    onClick={() => navigate("/assets")}
+                    onClick={() => navigate("/assets")} // Navigate to Asset List
                   >
                     <td className="py-2 px-4">{index + 1}</td>
                     <td className="py-2 px-4">{asset.equipmentName}</td>
@@ -175,7 +194,7 @@ const Dashboard = () => {
                 ))
               ) : (
                 <tr>
-                  <td colSpan="5" className="py-4 text-center text-gray-500">
+                  <td colSpan="4" className="py-4 text-center text-gray-500">
                     No assets found
                   </td>
                 </tr>

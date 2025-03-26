@@ -112,11 +112,8 @@ const AddAsset = () => {
                 className="w-full border p-2 rounded-md focus:ring focus:ring-blue-200"
                 required
               />
-            </div>
-          ))}
-        </div>
 
-        {/* Equipment Type */}
+              {/* Equipment Type */}
         <div>
             <label className="block font-medium">Equipment Type</label>
             <select
@@ -130,6 +127,11 @@ const AddAsset = () => {
               <option value="non-critical">Non-Critical</option>
             </select>
           </div>
+            </div>
+          ))}
+        </div>
+
+        
 
         {/* File Uploads */}
         <div className="mt-6">

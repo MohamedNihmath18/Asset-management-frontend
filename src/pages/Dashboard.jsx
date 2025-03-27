@@ -1,3 +1,5 @@
+ 
+
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -8,7 +10,6 @@ const Dashboard = () => {
   const [totalAssets, setTotalAssets] = useState(0);
   const [totalAmount, setTotalAmount] = useState(0);
   const [departmentTotals, setDepartmentTotals] = useState({});
-  const [departmentCounts, setDepartmentCounts] = useState({}); // New state for equipment count per department
   const [selectedDepartment, setSelectedDepartment] = useState("All");
   const navigate = useNavigate();
 
@@ -20,22 +21,14 @@ const Dashboard = () => {
         setAssets(fetchedAssets.slice(0, 5));
         setTotalAssets(fetchedAssets.length);
 
-        // Calculate total equipment value
         const amount = fetchedAssets.reduce((acc, asset) => acc + (asset.totalAmount || 0), 0);
         setTotalAmount(amount);
 
-        // Calculate total value and count of assets per department
-        const totalsByDepartment = {};
-        const countsByDepartment = {};
-
-        fetchedAssets.forEach(asset => {
-          const dept = asset.department || "Unknown";
-          totalsByDepartment[dept] = (totalsByDepartment[dept] || 0) + (asset.totalAmount || 0);
-          countsByDepartment[dept] = (countsByDepartment[dept] || 0) + 1; // Count occurrences
-        });
-
+        const totalsByDepartment = fetchedAssets.reduce((acc, asset) => {
+          acc[asset.department] = (acc[asset.department] || 0) + (asset.totalAmount || 0);
+          return acc;
+        }, {});
         setDepartmentTotals(totalsByDepartment);
-        setDepartmentCounts(countsByDepartment); // Store department-wise count
       } catch (error) {
         console.error("Error fetching assets:", error);
       }
@@ -65,9 +58,9 @@ const Dashboard = () => {
         </div>
       </div>
 
-      {/* Total Equipment Value and Count by Department */}
+      {/* Total Equipment Value by Department */}
       <div className="mt-8 bg-white shadow-lg p-4 rounded-lg">
-        <h2 className="text-xl font-semibold text-gray-700">📊 Equipment Stats by Department</h2>
+        <h2 className="text-xl font-semibold text-gray-700">📊 Total Equipment Value by Department</h2>
         <div className="mt-4">
           <select
             value={selectedDepartment}
@@ -75,31 +68,54 @@ const Dashboard = () => {
             className="border border-gray-300 p-2 rounded-md w-full md:w-auto"
           >
             <option value="All">All Departments</option>
-            {Object.keys(departmentTotals).map(dept => (
+            {Object.keys(departmentTotals).map((dept) => (
               <option key={dept} value={dept}>{dept}</option>
             ))}
           </select>
         </div>
+        <p className="text-2xl font-bold mt-4">${filteredAmount.toLocaleString()}</p>
+      </div>
 
-        {/* Display Department-wise Stats */}
-        <div className="mt-4">
-          {selectedDepartment === "All" ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {Object.keys(departmentTotals).map(dept => (
-                <div key={dept} className="bg-gray-100 p-4 rounded-lg shadow-md">
-                  <h3 className="text-lg font-semibold text-gray-800">{dept}</h3>
-                  <p className="text-gray-600">💰 Total Value: ${departmentTotals[dept].toLocaleString()}</p>
-                  <p className="text-gray-600">🛠 Total Equipments: {departmentCounts[dept]}</p>
-                </div>
-              ))}
-            </div>
-          ) : (
-            <div className="bg-gray-100 p-4 rounded-lg shadow-md">
-              <h3 className="text-lg font-semibold text-gray-800">{selectedDepartment}</h3>
-              <p className="text-gray-600">💰 Total Value: ${filteredAmount.toLocaleString()}</p>
-              <p className="text-gray-600">🛠 Total Equipments: {departmentCounts[selectedDepartment] || 0}</p>
-            </div>
-          )}
+      {/* Recent Assets */}
+      <div className="mt-8">
+        <h2 className="text-xl font-semibold text-gray-700">Recent Assets</h2>
+        <div className="bg-white shadow-md rounded-lg mt-4 overflow-x-auto">
+          <table className="w-full min-w-[600px] border-collapse border border-gray-300 text-sm md:text-base">
+            <thead>
+              <tr className="bg-blue-600 text-white">
+                <th className="py-2 px-4 text-left">#</th>
+                <th className="py-2 px-4 text-left">Equipment Name</th>
+                <th className="py-2 px-4 text-left">Asset No</th>
+                <th className="py-2 px-4 text-left">Department</th>
+                <th className="py-2 px-4 text-left">Equipment Type</th>
+              </tr>
+            </thead>
+            <tbody>
+              {assets.length > 0 ? (
+                assets.map((asset, index) => (
+                  <tr 
+                    key={asset._id} 
+                    className="border-b cursor-pointer hover:bg-gray-100 transition duration-150"
+                    onClick={() => navigate("/assets")}
+                  >
+                    <td className="py-2 px-4">{index + 1}</td>
+                    <td className="py-2 px-4">{asset.equipmentName}</td>
+                    <td className="py-2 px-4">{asset.assetNo}</td>
+                    <td className="py-2 px-4">{asset.department}</td>
+                    <td className="py-2 px-4">
+                      {asset.equipmentType ? asset.equipmentType : "Not Specified"}
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan="5" className="py-4 text-center text-gray-500">
+                    No assets found
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </table>
         </div>
       </div>
 

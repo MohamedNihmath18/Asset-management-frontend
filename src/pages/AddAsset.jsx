@@ -114,9 +114,8 @@ const AddAsset = () => {
               />
             </div>
           ))}
-        </div>
 
-        {/* Equipment Type */}
+          {/* Equipment Type */}
         <div>
             <label className="block font-medium">Equipment Type</label>
             <select
@@ -130,6 +129,9 @@ const AddAsset = () => {
               <option value="non-critical">Non-Critical</option>
             </select>
           </div>
+        </div>
+
+        
 
         {/* File Uploads */}
         <div className="mt-6">

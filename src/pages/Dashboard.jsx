@@ -1,5 +1,3 @@
- 
-
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -8,9 +6,7 @@ import { PlusCircle, List } from "lucide-react";
 const Dashboard = () => {
   const [assets, setAssets] = useState([]);
   const [totalAssets, setTotalAssets] = useState(0);
-  const [totalAmount, setTotalAmount] = useState(0);
-  const [departmentTotals, setDepartmentTotals] = useState({});
-  const [selectedDepartment, setSelectedDepartment] = useState("All");
+  const [departmentCounts, setDepartmentCounts] = useState({});
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -21,14 +17,12 @@ const Dashboard = () => {
         setAssets(fetchedAssets.slice(0, 5));
         setTotalAssets(fetchedAssets.length);
 
-        const amount = fetchedAssets.reduce((acc, asset) => acc + (asset.totalAmount || 0), 0);
-        setTotalAmount(amount);
-
-        const totalsByDepartment = fetchedAssets.reduce((acc, asset) => {
-          acc[asset.department] = (acc[asset.department] || 0) + (asset.totalAmount || 0);
+        // Count assets per department
+        const counts = fetchedAssets.reduce((acc, asset) => {
+          acc[asset.department] = (acc[asset.department] || 0) + 1;
           return acc;
         }, {});
-        setDepartmentTotals(totalsByDepartment);
+        setDepartmentCounts(counts);
       } catch (error) {
         console.error("Error fetching assets:", error);
       }
@@ -36,10 +30,6 @@ const Dashboard = () => {
 
     fetchAssets();
   }, []);
-
-  const filteredAmount = selectedDepartment === "All"
-    ? totalAmount
-    : departmentTotals[selectedDepartment] || 0;
 
   return (
     <div className="p-4 md:p-6 max-w-5xl mx-auto">
@@ -51,29 +41,16 @@ const Dashboard = () => {
         <div className="bg-white shadow-lg p-4 rounded-xl border-l-4 border-blue-600">
           <h2 className="text-lg font-semibold">Total Assets</h2>
           <p className="text-2xl font-bold mt-2">{totalAssets}</p>
-        </div>
-        <div className="bg-white shadow-lg p-4 rounded-xl border-l-4 border-green-600">
-          <h2 className="text-lg font-semibold">Total Amount</h2>
-          <p className="text-2xl font-bold mt-2">${totalAmount.toLocaleString()}</p>
-        </div>
-      </div>
 
-      {/* Total Equipment Value by Department */}
-      <div className="mt-8 bg-white shadow-lg p-4 rounded-lg">
-        <h2 className="text-xl font-semibold text-gray-700">📊 Total Equipment Value by Department</h2>
-        <div className="mt-4">
-          <select
-            value={selectedDepartment}
-            onChange={(e) => setSelectedDepartment(e.target.value)}
-            className="border border-gray-300 p-2 rounded-md w-full md:w-auto"
-          >
-            <option value="All">All Departments</option>
-            {Object.keys(departmentTotals).map((dept) => (
-              <option key={dept} value={dept}>{dept}</option>
+          {/* Department-wise count */}
+          <div className="mt-2 text-sm text-gray-700">
+            {Object.entries(departmentCounts).map(([dept, count]) => (
+              <p key={dept}>
+                <span className="font-semibold">{dept}:</span> {count}
+              </p>
             ))}
-          </select>
+          </div>
         </div>
-        <p className="text-2xl font-bold mt-4">${filteredAmount.toLocaleString()}</p>
       </div>
 
       {/* Recent Assets */}
@@ -96,7 +73,7 @@ const Dashboard = () => {
                   <tr 
                     key={asset._id} 
                     className="border-b cursor-pointer hover:bg-gray-100 transition duration-150"
-                    onClick={() => navigate("/assets")}
+                    onClick={() => navigate("/assets")} // Navigate to Asset List
                   >
                     <td className="py-2 px-4">{index + 1}</td>
                     <td className="py-2 px-4">{asset.equipmentName}</td>

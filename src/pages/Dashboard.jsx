@@ -42,7 +42,7 @@ const Dashboard = () => {
     <div className="flex min-h-screen">
       {/* Sidebar */}
       <div className="w-64 h-screen bg-gray-800 text-white p-6 fixed ">
-        <h2 className="text-xl font-bold mb-6">Asset Management</h2>
+        {/* <h2 className="text-xl font-bold mb-6">Asset Management</h2> */}
         <ul className="space-y-3">
           <li
             className="py-3 px-4 rounded-lg bg-gray-700 hover:bg-gray-600 cursor-pointer transition duration-200"

@@ -8,6 +8,8 @@ import Dashboard from "./pages/Dashboard";
 import AssetList from "./pages/AssetList";
 import AssetDetails from "./pages/AssetDetails";
 import ProtectedRoute from "./components/ProtectedRoute";
+import WarrantyPPM from "./pages/WarrantyPPM";
+import ServiceReport from "./pages/ServiceReport";
 
 function App() {
   return (

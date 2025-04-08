@@ -41,7 +41,7 @@ const Dashboard = () => {
   return (
     <div className="flex min-h-screen">
       {/* Sidebar */}
-      <div className="w-64 h-screen bg-gray-800 text-white p-6 fixed">
+      <div className="w-64 h-screen bg-gray-800 text-white p-6 fixed top-0">
         <h2 className="text-xl font-bold mb-6">Asset Management</h2>
         <ul className="space-y-3">
           <li

@@ -25,6 +25,9 @@ function App() {
             <Route path="/assets" element={<ProtectedRoute><AssetList /></ProtectedRoute>} />
             <Route path="/edit-asset/:id" element={<ProtectedRoute><EditAsset /></ProtectedRoute>} />
             <Route path="/asset/:id" element={<ProtectedRoute><AssetDetails /></ProtectedRoute>} />
+            <Route path="/warranty-ppm" element={<WarrantyPPM />} />
+            <Route path="/service-report" element={<ServiceReport />} />
+
 
             {/* Redirect Unknown Routes to Login */}
             <Route path="*" element={<Login />} />

@@ -35,28 +35,33 @@ const Dashboard = () => {
     fetchAssets();
   }, []);
 
-  const filteredAmount = selectedDepartment === "All"
-    ? totalAmount
-    : departmentTotals[selectedDepartment] || 0;
+  const filteredAmount =
+    selectedDepartment === "All" ? totalAmount : departmentTotals[selectedDepartment] || 0;
 
   return (
-    <div className="flex">
+    <div className="flex min-h-screen">
       {/* Sidebar */}
-      <div className="w-64 h-screen bg-gray-800 text-white p-4">
-        <h2 className="text-lg font-semibold">Asset Management</h2>
-        <ul className="mt-4">
-          <li className="py-2 px-4 hover:bg-gray-700 cursor-pointer" onClick={() => navigate("/warranty-ppm")}>
+      <div className="w-64 h-screen bg-gray-800 text-white p-6 fixed">
+        <h2 className="text-xl font-bold mb-6">Asset Management</h2>
+        <ul className="space-y-3">
+          <li
+            className="py-3 px-4 rounded-lg bg-gray-700 hover:bg-gray-600 cursor-pointer transition duration-200"
+            onClick={() => navigate("/warranty-ppm")}
+          >
             Warranty & PPM End Date
           </li>
-          <li className="py-2 px-4 hover:bg-gray-700 cursor-pointer" onClick={() => navigate("/service-report")}>
+          <li
+            className="py-3 px-4 rounded-lg bg-gray-700 hover:bg-gray-600 cursor-pointer transition duration-200"
+            onClick={() => navigate("/service-report")}
+          >
             Service Report
           </li>
         </ul>
       </div>
 
       {/* Main Dashboard */}
-      <div className="p-4 md:p-6 max-w-5xl mx-auto">
-        <h1 className="text-2xl md:text-3xl font-bold text-blue-700">Dashboard</h1>
+      <div className="ml-64 flex-1 p-6">
+        <h1 className="text-3xl font-bold text-blue-700">Dashboard</h1>
 
         {/* Stats Section */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
@@ -81,7 +86,9 @@ const Dashboard = () => {
             >
               <option value="All">All Departments</option>
               {Object.keys(departmentTotals).map((dept) => (
-                <option key={dept} value={dept}>{dept}</option>
+                <option key={dept} value={dept}>
+                  {dept}
+                </option>
               ))}
             </select>
           </div>
@@ -105,8 +112,8 @@ const Dashboard = () => {
               <tbody>
                 {assets.length > 0 ? (
                   assets.map((asset, index) => (
-                    <tr 
-                      key={asset._id} 
+                    <tr
+                      key={asset._id}
                       className="border-b cursor-pointer hover:bg-gray-100 transition duration-150"
                       onClick={() => navigate("/assets")}
                     >
@@ -133,10 +140,16 @@ const Dashboard = () => {
 
         {/* Quick Actions */}
         <div className="mt-8 flex flex-col md:flex-row gap-4">
-          <Link to="/add" className="bg-blue-600 text-white px-4 py-2 rounded-lg flex items-center gap-2 justify-center md:w-auto">
+          <Link
+            to="/add"
+            className="bg-blue-600 text-white px-4 py-2 rounded-lg flex items-center gap-2 justify-center md:w-auto"
+          >
             <PlusCircle size={20} /> Add Asset
           </Link>
-          <Link to="/assets" className="bg-gray-600 text-white px-4 py-2 rounded-lg flex items-center gap-2 justify-center md:w-auto">
+          <Link
+            to="/assets"
+            className="bg-gray-600 text-white px-4 py-2 rounded-lg flex items-center gap-2 justify-center md:w-auto"
+          >
             <List size={20} /> View All Assets
           </Link>
         </div>

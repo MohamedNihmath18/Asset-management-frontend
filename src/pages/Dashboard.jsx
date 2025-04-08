@@ -64,7 +64,7 @@ const Dashboard = () => {
         <h1 className="text-3xl font-bold text-blue-700">Dashboard</h1>
 
         {/* Stats Section */}
-        <div className="w-64 h-screen fixed top-0 left-0 bg-gray-800 text-white p-4 flex flex-col">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
           <div className="bg-white shadow-lg p-4 rounded-xl border-l-4 border-blue-600">
             <h2 className="text-lg font-semibold">Total Assets</h2>
             <p className="text-2xl font-bold mt-2">{totalAssets}</p>

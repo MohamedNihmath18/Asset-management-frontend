@@ -46,9 +46,15 @@ const Dashboard = () => {
         <ul className="space-y-3">
           <li
             className="py-3 px-4 rounded-lg bg-gray-700 hover:bg-gray-600 cursor-pointer transition duration-200"
-            onClick={() => navigate("/warranty-ppm")}
+            onClick={() => navigate("/warranty")}
           >
-            Warranty & PPM End Date
+            Warranty End Date
+          </li>
+          <li
+            className="py-3 px-4 rounded-lg bg-gray-700 hover:bg-gray-600 cursor-pointer transition duration-200"
+            onClick={() => navigate("/ppm")}
+          >
+            PPM End Date
           </li>
           <li
             className="py-3 px-4 rounded-lg bg-gray-700 hover:bg-gray-600 cursor-pointer transition duration-200"

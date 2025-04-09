@@ -13,13 +13,13 @@ const Warranty = () => {
 
         // Get current date and one month ahead
         const today = new Date();
-        const nextMonth = new Date();
-        nextMonth.setMonth(nextMonth.getMonth() + 1);
+        const oneMonthLater = new Date();
+        oneMonthLater.setMonth(oneMonthLater.getMonth() + 1);
 
-        // Filter assets with warranty expiring within a month
+        // Filter assets with warranty ending in the next month
         const expiringAssets = allAssets.filter((asset) => {
           const warrantyEndDate = new Date(asset.warrantyEndDate);
-          return warrantyEndDate >= today && warrantyEndDate <= nextMonth;
+          return warrantyEndDate >= today && warrantyEndDate <= oneMonthLater;
         });
 
         setAssets(expiringAssets);
@@ -40,8 +40,8 @@ const Warranty = () => {
 
   return (
     <div className="p-6 max-w-5xl mx-auto">
-      <h1 className="text-2xl font-bold text-blue-700">Warranty Expiring Soon</h1>
-      <p className="text-gray-600 mt-2">List of assets whose warranty ends within the next 30 days.</p>
+      <h1 className="text-2xl font-bold text-blue-700">Warranty Expiring in Next 30 Days</h1>
+      <p className="text-gray-600 mt-2">List of assets whose warranty will expire in the next month.</p>
 
       {/* Search Bar */}
       <input
@@ -80,7 +80,7 @@ const Warranty = () => {
             ) : (
               <tr>
                 <td colSpan="6" className="py-4 text-center text-gray-500">
-                  No expiring warranties found
+                  No upcoming warranty expirations
                 </td>
               </tr>
             )}

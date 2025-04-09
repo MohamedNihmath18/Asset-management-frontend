@@ -1,10 +1,92 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 const Warranty = () => {
+  const [assets, setAssets] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+
+  useEffect(() => {
+    const fetchExpiringWarranties = async () => {
+      try {
+        const response = await axios.get("https://asset-management-backend-vegp.onrender.com/api/assets");
+        const allAssets = response.data.assets;
+
+        // Get current date and one month ahead
+        const today = new Date();
+        const nextMonth = new Date();
+        nextMonth.setMonth(nextMonth.getMonth() + 1);
+
+        // Filter assets with warranty expiring within a month
+        const expiringAssets = allAssets.filter((asset) => {
+          const warrantyEndDate = new Date(asset.warrantyEndDate);
+          return warrantyEndDate >= today && warrantyEndDate <= nextMonth;
+        });
+
+        setAssets(expiringAssets);
+      } catch (error) {
+        console.error("Error fetching assets:", error);
+      }
+    };
+
+    fetchExpiringWarranties();
+  }, []);
+
+  // Filter assets based on search term
+  const filteredAssets = assets.filter((asset) =>
+    asset.equipmentName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    asset.department.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    asset.assetNo.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
-    <div className="p-4">
-      <h1 className="text-2xl font-bold">Warranty End Date</h1>
-      <p>Here you will see assets with warranty and PPM ending soon.</p>
+    <div className="p-6 max-w-5xl mx-auto">
+      <h1 className="text-2xl font-bold text-blue-700">Warranty Expiring Soon</h1>
+      <p className="text-gray-600 mt-2">List of assets whose warranty ends within the next 30 days.</p>
+
+      {/* Search Bar */}
+      <input
+        type="text"
+        placeholder="Search by Asset Name, Department, or Asset No..."
+        className="w-full border p-2 mt-4 rounded-md"
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+      />
+
+      {/* Asset Table */}
+      <div className="bg-white shadow-md rounded-lg mt-6 overflow-x-auto">
+        <table className="w-full min-w-[600px] border-collapse border border-gray-300 text-sm md:text-base">
+          <thead>
+            <tr className="bg-blue-600 text-white">
+              <th className="py-2 px-4 text-left">#</th>
+              <th className="py-2 px-4 text-left">Asset Name</th>
+              <th className="py-2 px-4 text-left">Asset No</th>
+              <th className="py-2 px-4 text-left">Department</th>
+              <th className="py-2 px-4 text-left">Warranty Start Date</th>
+              <th className="py-2 px-4 text-left">Warranty End Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            {filteredAssets.length > 0 ? (
+              filteredAssets.map((asset, index) => (
+                <tr key={asset._id} className="border-b hover:bg-gray-100 transition duration-150">
+                  <td className="py-2 px-4">{index + 1}</td>
+                  <td className="py-2 px-4">{asset.equipmentName}</td>
+                  <td className="py-2 px-4">{asset.assetNo}</td>
+                  <td className="py-2 px-4">{asset.department}</td>
+                  <td className="py-2 px-4">{new Date(asset.warrantyStartDate).toLocaleDateString()}</td>
+                  <td className="py-2 px-4 text-red-500 font-semibold">{new Date(asset.warrantyEndDate).toLocaleDateString()}</td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="6" className="py-4 text-center text-gray-500">
+                  No expiring warranties found
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };

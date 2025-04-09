@@ -46,6 +46,12 @@ const Dashboard = () => {
         <ul className="space-y-3">
           <li
             className="py-3 px-4 rounded-lg bg-gray-700 hover:bg-gray-600 cursor-pointer transition duration-200"
+            onClick={() => navigate("/")} // ✅ Add Dashboard Navigation
+          >
+            Dashboard
+          </li>
+          <li
+            className="py-3 px-4 rounded-lg bg-gray-700 hover:bg-gray-600 cursor-pointer transition duration-200"
             onClick={() => navigate("/warranty")}
           >
             Warranty End Date

@@ -42,40 +42,12 @@ const Dashboard = () => {
   return (
     <div className="flex min-h-screen">
       {/* Sidebar */}
-      {/* <div className="w-68 h-screen bg-gray-800 text-white p-6 fixed top-0 left-0 overflow-y-auto ">
-        <h2 className="text-xl font-bold mb-6">Asset Management System</h2>
-        <ul className="space-y-3">
-          <li
-            className="py-3 px-4 rounded-lg bg-gray-700 hover:bg-gray-600 cursor-pointer transition duration-200"
-            onClick={() => navigate("/")} // ✅ Add Dashboard Navigation
-          >
-            Dashboard
-          </li>
-          <li
-            className="py-3 px-4 rounded-lg bg-gray-700 hover:bg-gray-600 cursor-pointer transition duration-200"
-            onClick={() => navigate("/warranty")}
-          >
-            Warranty End Date
-          </li>
-          <li
-            className="py-3 px-4 rounded-lg bg-gray-700 hover:bg-gray-600 cursor-pointer transition duration-200"
-            onClick={() => navigate("/ppm")}
-          >
-            PPM End Date
-          </li>
-          <li
-            className="py-3 px-4 rounded-lg bg-gray-700 hover:bg-gray-600 cursor-pointer transition duration-200"
-            onClick={() => navigate("/service-report")}
-          >
-            Service Report
-          </li>
-        </ul>
-      </div> */}
+       
       <Sidebar />
       
 
       {/* Main Dashboard */}
-      <div className="ml-60 flex-1 p-6 mt-16">
+      <div className="ml-58 flex-1 p-4 mt-16">
         <h1 className="text-3xl font-bold text-blue-700">Dashboard</h1>
 
         {/* Stats Section */}

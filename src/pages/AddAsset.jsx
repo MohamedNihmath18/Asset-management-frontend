@@ -74,9 +74,10 @@ const AddAsset = () => {
   };
 
   return (
-    <div className="flex h-screen">
-      <Sidebar />
+     
+      
     <div className="p-6 max-w-4xl mx-auto">
+      <Sidebar />
       {/* Header */}
       <h1 className="text-3xl font-bold text-blue-700 text-center">Add New Asset</h1>
 
@@ -171,7 +172,7 @@ const AddAsset = () => {
         </button>
       </form>
     </div>
-    </div>
+     
   );
 };
 

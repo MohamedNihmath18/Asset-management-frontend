@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { PlusCircle, List } from "lucide-react";
+import Sidebar from "./Sidebar";
 
 const Dashboard = () => {
   const [assets, setAssets] = useState([]);
@@ -41,7 +42,7 @@ const Dashboard = () => {
   return (
     <div className="flex min-h-screen">
       {/* Sidebar */}
-      <div className="w-68 h-screen bg-gray-800 text-white p-6 fixed top-0 left-0 overflow-y-auto ">
+      {/* <div className="w-68 h-screen bg-gray-800 text-white p-6 fixed top-0 left-0 overflow-y-auto ">
         <h2 className="text-xl font-bold mb-6">Asset Management System</h2>
         <ul className="space-y-3">
           <li
@@ -69,7 +70,8 @@ const Dashboard = () => {
             Service Report
           </li>
         </ul>
-      </div>
+      </div> */}
+      <Sidebar />
 
       {/* Main Dashboard */}
       <div className="ml-64 flex-1 p-6">

@@ -104,7 +104,7 @@ const Dashboard = () => {
               ))}
             </select>
           </div>
-          <p className="text-2xl font-bold mt-4">${filteredAmount.toLocaleString()}</p>
+          <p className="text-2xl font-bold mt-4">RM{filteredAmount.toLocaleString()}</p>
         </div>
 
         {/* Recent Assets */}

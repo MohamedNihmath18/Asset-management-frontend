@@ -42,7 +42,7 @@ const Ppm = () => {
       <Sidebar />
 
       {/* Main Content */}
-      <div className="flex-1 p-6 ml-20">
+      <div className="flex-1 p-6 ml-64">
         <h1 className="text-2xl font-bold text-blue-700">PPM End Date</h1>
         <p className="text-gray-600">Assets whose PPM expires within 1 month.</p>
 

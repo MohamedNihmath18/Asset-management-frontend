@@ -116,7 +116,8 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="fixed top-0 left-0 w-full bg-blue-800 text-white p-4 shadow-md z-50">
+    <nav className="fixed top-0 left-0 w-full text-blue-800 p-4 shadow-md z-50"  style={{ backgroundColor: 'oklch(71.5% 0.143 215.221)' }}>
+      {/* //     <nav className="text-blue-800 p-4 shadow-md" style={{ backgroundColor: 'oklch(71.5% 0.143 215.221)' }}></nav> */}
       <div className="container mx-auto flex justify-between items-center">
         <Link to="/" className="text-xl font-bold">MSH ASSET MANAGEMENT SYSTEM</Link>
 

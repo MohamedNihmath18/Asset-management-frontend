@@ -6,8 +6,7 @@ const Sidebar = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="flex min-h-screen">
-    <div className="w-64 h-screen bg-gray-800 text-white p-6 fixed top-16 left-0">
+    <div className="w-68 h-screen bg-gray-800 text-white p-6 fixed top-0 left-0">
       <h2 className="text-xl font-bold mb-6">Asset Management System</h2>
       <ul className="space-y-3">
         <li
@@ -35,7 +34,6 @@ const Sidebar = () => {
           Service Report
         </li>
       </ul>
-    </div>
     </div>
   );
 };

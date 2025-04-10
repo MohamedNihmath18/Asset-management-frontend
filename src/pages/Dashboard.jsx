@@ -40,14 +40,14 @@ const Dashboard = () => {
     selectedDepartment === "All" ? totalAmount : departmentTotals[selectedDepartment] || 0;
 
   return (
-    <div className="flex min-h-screen">
-      {/* Sidebar */}
+  
        
-      <Sidebar />
+      
       
 
-      {/* Main Dashboard */}
+      // {/* Main Dashboard */}
       <div className="ml-54 flex-1 p-4 mt-16">
+        <Sidebar />
         <h1 className="text-3xl font-bold text-blue-700">Dashboard</h1>
 
         {/* Stats Section */}
@@ -141,7 +141,7 @@ const Dashboard = () => {
           </Link>
         </div>
       </div>
-    </div>
+     
   );
 };
 

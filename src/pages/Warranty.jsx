@@ -42,7 +42,7 @@ const Warranty = () => {
       <Sidebar />
 
       {/* Main Content */}
-      <div className="flex-1 p-6 ml-64">
+      <div className="flex-1 p-6 ml-20">
         <h1 className="text-2xl font-bold text-blue-700">Warranty Expiring in Next 30 Days</h1>
         <p className="text-gray-600 mt-2">List of assets whose warranty will expire in the next month.</p>
 

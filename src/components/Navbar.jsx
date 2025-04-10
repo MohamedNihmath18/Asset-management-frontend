@@ -28,7 +28,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-[#003639] text-white p-4 shadow-md">
+    <nav className="text-white p-4 shadow-md" style={{ backgroundColor: 'oklch(78.9% 0.154 211.53)' }}>
       <div className="container mx-auto flex justify-between items-center">
         {/* Logo / Brand */}
         <Link to="/" className="text-xl font-bold">Mahsa Asset Management System</Link>

@@ -20,7 +20,7 @@ const Login = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gradient-to-r from-blue-500 to-blue-700 px-4">
+    <div className="flex justify-center items-center min-h-screen bg-gray-100 px-4">
       <div className="w-full max-w-md bg-white p-8 shadow-2xl rounded-lg">
         
         {/* Hospital Name */}

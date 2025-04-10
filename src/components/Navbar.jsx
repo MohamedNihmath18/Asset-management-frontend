@@ -28,7 +28,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="text-blue p-4 shadow-md" style={{ backgroundColor: 'oklch(71.5% 0.143 215.221)' }}>
+    <nav className="text-blue-600 p-4 shadow-md" style={{ backgroundColor: 'oklch(71.5% 0.143 215.221)' }}>
       <div className="container mx-auto flex justify-between items-center">
         {/* Logo / Brand */}
         <Link to="/" className="text-xl font-bold">Mahsa Asset Management System</Link>
@@ -45,8 +45,8 @@ const Navbar = () => {
         <div className="hidden md:flex space-x-6 items-center">
           {isLoggedIn && (
             <>
-              <Link to="/" className="hover:underline">Home</Link>
-              <Link to="/add" className="hover:underline">Add Asset</Link>
+              <Link to="/" className="hover:underline"><strong>Home</strong></Link>
+              <Link to="/add" className="hover:underline"><strong>Add Asset</strong></Link>
               
               {/* Styled Logout Button */}
               <button 

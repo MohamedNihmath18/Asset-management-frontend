@@ -24,12 +24,12 @@ const Login = () => {
       <div className="w-full max-w-md bg-white p-8 shadow-2xl rounded-lg">
         
         {/* Hospital Name */}
-        <h1 className="text-center text-3xl font-bold text-gray-800 mb-6">
-          Mahsa Specialist Hospital
+        <h1 className="text-center text-3xl font-bold text-blue-800 mb-6">
+          MAHSA SPECIALIST HOSPITAL
         </h1>
 
         {/* Login Form */}
-        <h2 className="text-center text-2xl font-semibold text-blue-600">Admin Login</h2>
+        <h2 className="text-center text-2xl font-semibold text-blue-600">ASSET MANAGEMENT SYSTEM</h2>
         {error && <p className="text-red-500 text-center mt-2">{error}</p>}
 
         <form onSubmit={handleLogin} className="mt-6">

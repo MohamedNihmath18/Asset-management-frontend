@@ -83,7 +83,7 @@ const AssetDetails = () => {
                 ["PPM End Date", asset.ppmEndDate ? new Date(asset.ppmEndDate).toLocaleDateString() : "N/A"],
                 ["Invoice No", asset.invoiceNo],
                 ["Equipment Type", asset.equipmentType === "critical" ? "Critical" : "Non-Critical"],
-                ["Total Amount", asset.totalAmount ? `$RM{asset.totalAmount}` : "N/A"],
+                ["Total Amount", asset.totalAmount ? `RM${asset.totalAmount}` : "N/A"],
                 ["Lifespan", asset.lifespan],
                 ["Doctor In-Charge", asset.drInchargeName],
                 ["Purpose of Equipment", asset.purposeOfEquipment],

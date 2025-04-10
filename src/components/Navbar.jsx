@@ -1,80 +1,6 @@
-// // import { Link, useNavigate } from "react-router-dom";
-
-// // const Navbar = () => {
-// //   const navigate = useNavigate();
-  
-// //   const handleLogout = () => {
-// //     localStorage.removeItem("token"); // Remove Token
-// //     navigate("/login"); // Redirect to login
-// //   };
-
-// //   return (
-// //     <nav className="bg-blue-600 text-white p-4 shadow-md">
-// //       <div className="container mx-auto flex justify-between items-center">
-// //         <Link to="/" className="text-xl font-bold">Asset Management System</Link>
-// //         <div className="space-x-4">
-// //           <Link to="/" className="hover:underline">Home</Link>
-// //           <Link to="/add" className="hover:underline">Add Asset</Link>
-// //           <button onClick={handleLogout} className="bg-red-500 px-4 py-2 rounded">Logout</button>
-// //         </div>
-// //       </div>
-// //     </nav>
-// //   );
-// // };
-
-// // export default Navbar;
-
-// import { Link, useNavigate } from "react-router-dom";
-// import { useEffect, useState } from "react";
-
-// const Navbar = () => {
-//   const navigate = useNavigate();
-//   const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("token"));
-
-//   useEffect(() => {
-//     const checkLoginStatus = () => {
-//       setIsLoggedIn(!!localStorage.getItem("token")); // Update state if token exists
-//     };
-
-//     window.addEventListener("storage", checkLoginStatus); // Listen for storage changes
-//     return () => window.removeEventListener("storage", checkLoginStatus);
-//   }, []);
-
-//   useEffect(() => {
-//     // This will make sure state updates immediately after login
-//     const token = localStorage.getItem("token");
-//     setIsLoggedIn(!!token);
-//   }, [localStorage.getItem("token")]); // ✅ React will update when token changes
-
-//   const handleLogout = () => {
-//     localStorage.removeItem("token");
-//     setIsLoggedIn(false);
-//     navigate("/login");
-//   };
-
-//   return (
-//     <nav className="bg-blue-600 text-white p-4 shadow-md">
-//       <div className="container mx-auto flex justify-between items-center">
-//         <Link to="/" className="text-xl font-bold">Asset Management System</Link>
-//         <div className="space-x-4">
-//           {isLoggedIn ? (
-//             <>
-//               <Link to="/" className="hover:underline">Home</Link>
-//               <Link to="/add" className="hover:underline">Add Asset</Link>
-//               <button onClick={handleLogout} className="bg-red-500 px-4 py-2 rounded">Logout</button>
-//             </>
-//           ) : null}
-//         </div>
-//       </div>
-//     </nav>
-//   );
-// };
-
-// export default Navbar;
-
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { Menu, X } from "lucide-react"; // For mobile menu icons
+import { Menu, X, LogOut } from "lucide-react"; // Added LogOut icon
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -116,13 +42,18 @@ const Navbar = () => {
         </button>
 
         {/* Desktop Navigation */}
-        <div className="hidden md:flex space-x-6">
+        <div className="hidden md:flex space-x-6 items-center">
           {isLoggedIn && (
             <>
               <Link to="/" className="hover:underline">Home</Link>
               <Link to="/add" className="hover:underline">Add Asset</Link>
-              <button onClick={handleLogout} className="bg-red-500 px-4 py-2 rounded">
-                Logout
+              
+              {/* Styled Logout Button */}
+              <button 
+                onClick={handleLogout} 
+                className="bg-gradient-to-r from-red-500 to-red-700 hover:from-red-600 hover:to-red-800 px-4 py-2 flex items-center gap-2 rounded-lg shadow-lg transition duration-200"
+              >
+                <LogOut size={18} /> Logout
               </button>
             </>
           )}
@@ -136,7 +67,14 @@ const Navbar = () => {
             <>
               <Link to="/" className="hover:underline" onClick={() => setIsMenuOpen(false)}>Home</Link>
               <Link to="/add" className="hover:underline" onClick={() => setIsMenuOpen(false)}>Add Asset</Link>
-              <button onClick={handleLogout} className="bg-red-500 px-4 py-2 rounded">Logout</button>
+              
+              {/* Styled Mobile Logout Button */}
+              <button 
+                onClick={handleLogout} 
+                className="bg-gradient-to-r from-red-500 to-red-700 hover:from-red-600 hover:to-red-800 px-4 py-2 flex items-center justify-center gap-2 rounded-lg shadow-lg transition duration-200"
+              >
+                <LogOut size={18} /> Logout
+              </button>
             </>
           )}
         </div>
@@ -146,4 +84,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-

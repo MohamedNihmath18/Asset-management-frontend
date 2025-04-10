@@ -31,7 +31,7 @@ const Navbar = () => {
     <nav className="text-blue-800 p-4 shadow-md" style={{ backgroundColor: 'oklch(71.5% 0.143 215.221)' }}>
       <div className="container mx-auto flex justify-between items-center">
         {/* Logo / Brand */}
-        <Link to="/" className="text-xl font-bold">Mahsa Asset Management System</Link>
+        <Link to="/" className="text-xl font-bold">MSH ASSET MANAGEMENT SYSTEM</Link>
 
         {/* Mobile Menu Button */}
         <button

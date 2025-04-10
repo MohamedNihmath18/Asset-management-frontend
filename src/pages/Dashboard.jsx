@@ -47,7 +47,7 @@ const Dashboard = () => {
       
 
       {/* Main Dashboard */}
-      <div className="ml-64 flex-1 p-4 mt-16">
+      <div className="ml-64 flex-1 p-4 ">
         <h1 className="text-3xl font-bold text-blue-700">Dashboard</h1>
 
         {/* Stats Section */}

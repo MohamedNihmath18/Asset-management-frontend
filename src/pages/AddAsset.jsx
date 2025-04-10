@@ -4,7 +4,7 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Loader2 } from "lucide-react";
-import Sidebar from "./Sidebar";
+ 
 
 const AddAsset = () => {
   const navigate = useNavigate();
@@ -77,7 +77,7 @@ const AddAsset = () => {
      
       
     <div className="p-6 max-w-4xl mx-auto">
-      <Sidebar />
+     
       {/* Header */}
       <h1 className="text-3xl font-bold text-blue-700 text-center">Add New Asset</h1>
 

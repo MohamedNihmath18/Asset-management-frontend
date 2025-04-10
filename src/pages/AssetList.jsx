@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Trash2, Eye } from "lucide-react";
-import Sidebar from "./Sidebar";
+ 
 
 const AssetList = () => {
   const navigate = useNavigate();
@@ -54,7 +54,7 @@ const AssetList = () => {
   return (
     <div className="p-4 md:p-6 max-w-5xl mx-auto">
       <div className="flex flex-col md:flex-row md:justify-between md:items-center mb-4 gap-3">
-      <Sidebar />
+       
         <h1 className="text-2xl md:text-3xl font-bold text-blue-700">Asset List</h1>
         <div className="flex flex-col md:flex-row gap-2 w-full md:w-auto">
           <select

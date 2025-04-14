@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import mahsaLogo from "../assets/mahsa-logo.png";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -25,7 +26,8 @@ const Login = () => {
         
         {/* Hospital Name */}
         <h1 className="text-center text-3xl font-bold text-blue-800 mb-6">
-          MAHSA SPECIALIST HOSPITAL
+          {/* MAHSA SPECIALIST HOSPITAL */}
+          <img src={mahsaLogo} alt="Mahsa Logo" className="h-10 w-auto" />
         </h1>
 
         {/* Login Form */}

@@ -36,7 +36,7 @@ const Navbar = () => {
 
         <Link to="/" className="flex items-center space-x-3">
           <img src={mahsaLogo} alt="Mahsa Logo" className="h-10 w-auto" />
-          <span className="text-xl font-bold">MSH ASSET MANAGEMENT SYSTEM</span>
+          <span className="text-xl font-bold">ASSET MANAGEMENT SYSTEM</span>
         </Link>
 
         {/* Mobile Menu Button */}

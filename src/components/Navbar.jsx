@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Menu, X, LogOut } from "lucide-react"; // Added LogOut icon
-import mahsaLogo from "./assets/mahsa-logo.png";
+import mahsaLogo from "../assets/mahsa-logo.png";
 
 const Navbar = () => {
   const navigate = useNavigate();

@@ -66,6 +66,12 @@ const Sidebar = () => {
         >
           Service Report
         </li>
+        <li
+          className="py-3 px-4 rounded-lg bg-gray-700 hover:bg-gray-600 cursor-pointer transition duration-200"
+          onClick={() => navigate("/assets")}
+        >
+          Assets
+        </li>
       </ul>
     </div>
   );

@@ -2,54 +2,88 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 const ServiceReport = () => {
-  const [reports, setReports] = useState([]);
+  const [assets, setAssets] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
-    axios.get("http://localhost:5000/api/service-reports")
-      .then((res) => setReports(res.data))
-      .catch((err) => console.error("Error fetching reports:", err));
+    const fetchReports = async () => {
+      try {
+        const response = await axios.get(
+          "https://asset-management-backend-vegp.onrender.com/api/assets/service-reports"
+        );
+        setAssets(response.data);
+      } catch (error) {
+        console.error("Error fetching service reports:", error);
+      }
+    };
+
+    fetchReports();
   }, []);
 
+  const filteredAssets = assets.filter((asset) =>
+    asset.equipmentName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    asset.assetNo.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    asset.department.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
-    <div className="p-4">
-      <h1 className="text-2xl font-bold mb-4">Service Reports</h1>
-      {reports.length === 0 ? (
-        <p>No service reports found.</p>
-      ) : (
-        <table className="table-auto w-full border border-gray-300">
+    <div className="ml-64 p-6 max-w-6xl">
+      <h1 className="text-2xl font-bold text-blue-700">Service Reports</h1>
+      <p className="text-gray-600">View all uploaded service reports.</p>
+
+      <input
+        type="text"
+        placeholder="Search by Equipment Name, Asset No, or Department"
+        className="mt-4 p-2 border rounded w-full"
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+      />
+
+      <div className="mt-4 bg-white shadow-md rounded-lg overflow-x-auto">
+        <table className="w-full border-collapse border border-gray-300 text-sm">
           <thead>
-            <tr className="bg-gray-200">
-              <th className="px-4 py-2 border">Equipment Name</th>
-              <th className="px-4 py-2 border">Asset No</th>
-              <th className="px-4 py-2 border">Department</th>
-              <th className="px-4 py-2 border">Service Report</th>
+            <tr className="bg-blue-600 text-white">
+              <th className="py-2 px-4 text-left">#</th>
+              <th className="py-2 px-4 text-left">Equipment Name</th>
+              <th className="py-2 px-4 text-left">Asset No</th>
+              <th className="py-2 px-4 text-left">Department</th>
+              <th className="py-2 px-4 text-left">Service Report</th>
             </tr>
           </thead>
           <tbody>
-            {reports.map((report) => (
-              <tr key={report._id} className="border-t">
-                <td className="px-4 py-2 border">{report.equipmentName}</td>
-                <td className="px-4 py-2 border">{report.assetNo}</td>
-                <td className="px-4 py-2 border">{report.department}</td>
-                <td className="px-4 py-2 border text-blue-600">
-                  {report.documents?.serviceReports ? (
-                    <a
-                      href={`http://localhost:5000/${report.documents.serviceReports}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="underline"
-                    >
-                      View Report
-                    </a>
-                  ) : (
-                    "Not uploaded"
-                  )}
+            {filteredAssets.length > 0 ? (
+              filteredAssets.map((asset, index) => (
+                <tr key={asset._id} className="border-b hover:bg-gray-100">
+                  <td className="py-2 px-4">{index + 1}</td>
+                  <td className="py-2 px-4">{asset.equipmentName}</td>
+                  <td className="py-2 px-4">{asset.assetNo}</td>
+                  <td className="py-2 px-4">{asset.department}</td>
+                  <td className="py-2 px-4">
+                    {asset.documents?.serviceReports ? (
+                      <a
+                        href={`https://asset-management-backend-vegp.onrender.com/${asset.documents.serviceReports}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-blue-600 underline"
+                      >
+                        View Report
+                      </a>
+                    ) : (
+                      <span className="text-gray-400 italic">No Report</span>
+                    )}
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="5" className="py-4 text-center text-gray-500">
+                  No service reports found
                 </td>
               </tr>
-            ))}
+            )}
           </tbody>
         </table>
-      )}
+      </div>
     </div>
   );
 };

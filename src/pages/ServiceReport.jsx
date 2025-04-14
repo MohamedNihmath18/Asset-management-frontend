@@ -27,7 +27,7 @@ const ServiceReport = () => {
   );
 
   return (
-    <div className="ml-64 p-6 max-w-6xl">
+    <div className="p-6 w-full">
       <h1 className="text-2xl font-bold text-blue-700">Service Reports</h1>
       <p className="text-gray-600">View all uploaded service reports.</p>
 

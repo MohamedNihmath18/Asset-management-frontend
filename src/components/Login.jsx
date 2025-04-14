@@ -25,7 +25,8 @@ const Login = () => {
       <div className="w-full max-w-md bg-white p-8 shadow-2xl rounded-lg">
         
         {/* Hospital Name */}
-        <h1 className="text-center text-3xl font-bold text-blue-800 mb-6">
+        {/* <h1 className="text-center text-3xl font-bold text-blue-800 mb-6"> */}
+        <h1 className="flex justify-center mb-4">
           {/* MAHSA SPECIALIST HOSPITAL */}
           <img src={mahsaLogo} alt="Mahsa Logo" className="h-10 w-auto" />
         </h1>

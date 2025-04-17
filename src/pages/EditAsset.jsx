@@ -73,60 +73,17 @@ const EditAsset = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   try {
-  //     await axios.put(`https://asset-management-backend-vegp.onrender.com/api/assets/${id}`, formData);
-  //     alert("Asset updated successfully!");
-  //     navigate("/");
-  //   } catch (error) {
-  //     console.error("Error updating asset:", error);
-  //   }
-  // };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
-    const data = new FormData();
-  
-    // Append regular text fields
-    Object.keys(formData).forEach((key) => {
-      if (
-        key !== "testingCommissioning" &&
-        key !== "serviceReports" &&
-        key !== "ppm" &&
-        key !== "license" &&
-        key !== "contract"
-      ) {
-        data.append(key, formData[key]);
-      }
-    });
-  
-    // Append file fields if new files are selected
-    if (formData.testingCommissioning) data.append("testingCommissioning", formData.testingCommissioning);
-    if (formData.serviceReports) data.append("serviceReports", formData.serviceReports);
-    if (formData.ppm) data.append("ppm", formData.ppm);
-    if (formData.license) data.append("license", formData.license);
-    if (formData.contract) data.append("contract", formData.contract);
-  
     try {
-      await axios.put(
-        `https://asset-management-backend-vegp.onrender.com/api/assets/${id}`,
-        data,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data"
-          }
-        }
-      );
+      await axios.put(`https://asset-management-backend-vegp.onrender.com/api/assets/${id}`, formData);
       alert("Asset updated successfully!");
       navigate("/");
     } catch (error) {
       console.error("Error updating asset:", error);
-      alert("Failed to update asset");
     }
   };
-  
+
 
   return (
     <div className="p-4 md:p-6 max-w-5xl mx-auto">

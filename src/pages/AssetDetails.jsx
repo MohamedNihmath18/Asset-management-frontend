@@ -105,7 +105,8 @@ const AssetDetails = () => {
             value ? (
               <a
                 key={key}
-                href={`https://asset-management-backend-vegp.onrender.com/${value}`}
+                // href={`https://asset-management-backend-vegp.onrender.com/${value}`}
+                href={value} 
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-blue-600 hover:underline bg-gray-100 px-3 py-2 rounded-md"

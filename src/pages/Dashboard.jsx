@@ -1,53 +1,50 @@
-import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
-import { PlusCircle, List } from "lucide-react";
-import Sidebar from "./Sidebar";
+// import { useEffect, useState } from "react";
+// import { Link, useNavigate } from "react-router-dom";
+// import axios from "axios";
+// import { PlusCircle, List } from "lucide-react";
+// import Sidebar from "./Sidebar";
 
-const Dashboard = () => {
-  const [assets, setAssets] = useState([]);
-  const [totalAssets, setTotalAssets] = useState(0);
-  const [totalAmount, setTotalAmount] = useState(0);
-  const [departmentTotals, setDepartmentTotals] = useState({});
-  const [selectedDepartment, setSelectedDepartment] = useState("All");
-  const navigate = useNavigate();
+// const Dashboard = () => {
+//   const [assets, setAssets] = useState([]);
+//   const [totalAssets, setTotalAssets] = useState(0);
+//   const [totalAmount, setTotalAmount] = useState(0);
+//   const [departmentTotals, setDepartmentTotals] = useState({});
+//   const [selectedDepartment, setSelectedDepartment] = useState("All");
+//   const navigate = useNavigate();
 
-  useEffect(() => {
-    const fetchAssets = async () => {
-      try {
-        const response = await axios.get("https://asset-management-backend-vegp.onrender.com/api/assets");
-        const fetchedAssets = response.data.assets;
-        setAssets(fetchedAssets.slice(0, 5));
-        setTotalAssets(fetchedAssets.length);
+//   useEffect(() => {
+//     const fetchAssets = async () => {
+//       try {
+//         const response = await axios.get("https://asset-management-backend-vegp.onrender.com/api/assets");
+//         const fetchedAssets = response.data.assets;
+//         setAssets(fetchedAssets.slice(0, 5));
+//         setTotalAssets(fetchedAssets.length);
 
-        const amount = fetchedAssets.reduce((acc, asset) => acc + (asset.totalAmount || 0), 0);
-        setTotalAmount(amount);
+//         const amount = fetchedAssets.reduce((acc, asset) => acc + (asset.totalAmount || 0), 0);
+//         setTotalAmount(amount);
 
-        const totalsByDepartment = fetchedAssets.reduce((acc, asset) => {
-          acc[asset.department] = (acc[asset.department] || 0) + (asset.totalAmount || 0);
-          return acc;
-        }, {});
-        setDepartmentTotals(totalsByDepartment);
-      } catch (error) {
-        console.error("Error fetching assets:", error);
-      }
-    };
+//         const totalsByDepartment = fetchedAssets.reduce((acc, asset) => {
+//           acc[asset.department] = (acc[asset.department] || 0) + (asset.totalAmount || 0);
+//           return acc;
+//         }, {});
+//         setDepartmentTotals(totalsByDepartment);
+//       } catch (error) {
+//         console.error("Error fetching assets:", error);
+//       }
+//     };
 
-    fetchAssets();
-  }, []);
+//     fetchAssets();
+//   }, []);
 
-  const filteredAmount =
-    selectedDepartment === "All" ? totalAmount : departmentTotals[selectedDepartment] || 0;
+//   const filteredAmount =
+//     selectedDepartment === "All" ? totalAmount : departmentTotals[selectedDepartment] || 0;
 
-  return (
-//     <div className="flex min-h-screen">
-//       {/* Sidebar */}
-       
-//       <Sidebar />
-      
+//   return (
+ 
 
+//  <div className="flex min-h-screen">
 //       {/* Main Dashboard */}
-//       <div className="ml-64 flex-1 p-4 ">
+//       <div className="flex-1 p-4">
 //         <h1 className="text-3xl font-bold text-blue-700">Dashboard</h1>
 
 //         {/* Stats Section */}
@@ -145,9 +142,65 @@ const Dashboard = () => {
 //   );
 // };
 
- <div className="flex min-h-screen">
+// export default Dashboard;
+
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { PlusCircle, List } from "lucide-react";
+import Sidebar from "./Sidebar";
+
+const Dashboard = () => {
+  const [assets, setAssets] = useState([]);
+  const [filteredAssets, setFilteredAssets] = useState([]);
+  const [totalAssets, setTotalAssets] = useState(0);
+  const [totalAmount, setTotalAmount] = useState(0);
+  const [departmentTotals, setDepartmentTotals] = useState({});
+  const [selectedDepartment, setSelectedDepartment] = useState("All");
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchAssets = async () => {
+      try {
+        const response = await axios.get("https://asset-management-backend-vegp.onrender.com/api/assets");
+        const fetchedAssets = response.data.assets;
+        setAssets(fetchedAssets); // ✅ Store all assets
+        setTotalAssets(fetchedAssets.length);
+
+        const amount = fetchedAssets.reduce((acc, asset) => acc + (asset.totalAmount || 0), 0);
+        setTotalAmount(amount);
+
+        const totalsByDepartment = fetchedAssets.reduce((acc, asset) => {
+          acc[asset.department] = (acc[asset.department] || 0) + (asset.totalAmount || 0);
+          return acc;
+        }, {});
+        setDepartmentTotals(totalsByDepartment);
+      } catch (error) {
+        console.error("Error fetching assets:", error);
+      }
+    };
+
+    fetchAssets();
+  }, []);
+
+  useEffect(() => {
+    if (selectedDepartment === "All") {
+      setFilteredAssets([]);
+    } else {
+      setFilteredAssets(assets.filter(asset => asset.department === selectedDepartment));
+    }
+  }, [selectedDepartment, assets]);
+
+  const filteredAmount =
+    selectedDepartment === "All" ? totalAmount : departmentTotals[selectedDepartment] || 0;
+
+  return (
+    <div className="flex min-h-screen">
+      {/* Sidebar */}
+      <Sidebar />
+
       {/* Main Dashboard */}
-      <div className="flex-1 p-4">
+      <div className="flex-1 p-4 ml-64">
         <h1 className="text-3xl font-bold text-blue-700">Dashboard</h1>
 
         {/* Stats Section */}
@@ -173,13 +226,48 @@ const Dashboard = () => {
             >
               <option value="All">All Departments</option>
               {Object.keys(departmentTotals).map((dept) => (
-                <option key={dept} value={dept}>
-                  {dept}
-                </option>
+                <option key={dept} value={dept}>{dept}</option>
               ))}
             </select>
           </div>
           <p className="text-2xl font-bold mt-4">RM{filteredAmount.toLocaleString()}</p>
+
+          {/* Assets List for Selected Department */}
+          {filteredAssets.length > 0 && (
+            <div className="mt-6">
+              <h3 className="text-lg font-semibold text-gray-700">
+                Assets in {selectedDepartment} Department
+              </h3>
+              <div className="mt-2 overflow-x-auto bg-gray-50 rounded-md shadow-md">
+                <table className="w-full min-w-[600px] border-collapse border border-gray-300 text-sm md:text-base">
+                  <thead>
+                    <tr className="bg-blue-600 text-white">
+                      <th className="py-2 px-4 text-left">#</th>
+                      <th className="py-2 px-4 text-left">Equipment Name</th>
+                      <th className="py-2 px-4 text-left">Asset No</th>
+                      <th className="py-2 px-4 text-left">Department</th>
+                      <th className="py-2 px-4 text-left">Total Amount</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {filteredAssets.map((asset, index) => (
+                      <tr
+                        key={asset._id}
+                        className="border-b hover:bg-gray-100 cursor-pointer"
+                        onClick={() => navigate("/assets")}
+                      >
+                        <td className="py-2 px-4">{index + 1}</td>
+                        <td className="py-2 px-4">{asset.equipmentName}</td>
+                        <td className="py-2 px-4">{asset.assetNo}</td>
+                        <td className="py-2 px-4">{asset.department}</td>
+                        <td className="py-2 px-4">RM{asset.totalAmount}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Recent Assets */}
@@ -197,29 +285,19 @@ const Dashboard = () => {
                 </tr>
               </thead>
               <tbody>
-                {assets.length > 0 ? (
-                  assets.map((asset, index) => (
-                    <tr
-                      key={asset._id}
-                      className="border-b cursor-pointer hover:bg-gray-100 transition duration-150"
-                      onClick={() => navigate("/assets")}
-                    >
-                      <td className="py-2 px-4">{index + 1}</td>
-                      <td className="py-2 px-4">{asset.equipmentName}</td>
-                      <td className="py-2 px-4">{asset.assetNo}</td>
-                      <td className="py-2 px-4">{asset.department}</td>
-                      <td className="py-2 px-4">
-                        {asset.equipmentType ? asset.equipmentType : "Not Specified"}
-                      </td>
-                    </tr>
-                  ))
-                ) : (
-                  <tr>
-                    <td colSpan="5" className="py-4 text-center text-gray-500">
-                      No assets found
-                    </td>
+                {assets.slice(0, 5).map((asset, index) => (
+                  <tr
+                    key={asset._id}
+                    className="border-b cursor-pointer hover:bg-gray-100 transition duration-150"
+                    onClick={() => navigate("/assets")}
+                  >
+                    <td className="py-2 px-4">{index + 1}</td>
+                    <td className="py-2 px-4">{asset.equipmentName}</td>
+                    <td className="py-2 px-4">{asset.assetNo}</td>
+                    <td className="py-2 px-4">{asset.department}</td>
+                    <td className="py-2 px-4">{asset.equipmentType || "Not Specified"}</td>
                   </tr>
-                )}
+                ))}
               </tbody>
             </table>
           </div>

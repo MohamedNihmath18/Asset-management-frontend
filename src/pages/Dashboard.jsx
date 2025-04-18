@@ -148,7 +148,7 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { PlusCircle, List } from "lucide-react";
-import Sidebar from "./Sidebar";
+ 
 
 const Dashboard = () => {
   const [assets, setAssets] = useState([]);
@@ -196,11 +196,10 @@ const Dashboard = () => {
 
   return (
     <div className="flex min-h-screen">
-      {/* Sidebar */}
-      <Sidebar />
+      
 
       {/* Main Dashboard */}
-      <div className="flex-1 p-4 ml-64">
+      <div className="flex-1 p-4">
         <h1 className="text-3xl font-bold text-blue-700">Dashboard</h1>
 
         {/* Stats Section */}

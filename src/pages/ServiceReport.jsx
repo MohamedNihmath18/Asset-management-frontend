@@ -8,10 +8,12 @@ const ServiceReport = () => {
   useEffect(() => {
     const fetchReports = async () => {
       try {
-        const response = await axios.get(
-          "https://asset-management-backend-vegp.onrender.com/api/assets/service-reports"
-        );
-        setAssets(response.data);
+        const response = await axios.get("https://asset-management-backend-vegp.onrender.com/api/assets");
+        const allAssets = response.data.assets;
+
+        // ✅ Filter only those that have service report document
+        const withReports = allAssets.filter(asset => asset.documents?.serviceReports);
+        setAssets(withReports);
       } catch (error) {
         console.error("Error fetching service reports:", error);
       }
@@ -21,9 +23,9 @@ const ServiceReport = () => {
   }, []);
 
   const filteredAssets = assets.filter((asset) =>
-    asset.equipmentName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    asset.assetNo.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    asset.department.toLowerCase().includes(searchTerm.toLowerCase())
+    asset.equipmentName?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    asset.assetNo?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    asset.department?.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
@@ -61,7 +63,7 @@ const ServiceReport = () => {
                   <td className="py-2 px-4">
                     {asset.documents?.serviceReports ? (
                       <a
-                        href={`https://asset-management-backend-vegp.onrender.com/${asset.documents.serviceReports}`}
+                        href={asset.documents.serviceReports}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-blue-600 underline"

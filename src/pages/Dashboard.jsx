@@ -269,7 +269,7 @@ const Dashboard = () => {
           )}
         </div>
 
-        Recent Assets
+        {/* Recent Assets
         <div className="mt-8">
           <h2 className="text-xl font-semibold text-gray-700">Recent Assets</h2>
           <div className="bg-white shadow-md rounded-lg mt-4 overflow-x-auto">
@@ -300,7 +300,7 @@ const Dashboard = () => {
               </tbody>
             </table>
           </div>
-        </div>
+        </div> */}
 
         {/* Quick Actions */}
         <div className="mt-8 flex flex-col md:flex-row gap-4">

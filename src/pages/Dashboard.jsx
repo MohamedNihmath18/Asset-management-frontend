@@ -49,6 +49,15 @@ const Dashboard = () => {
   const filteredAmount =
     selectedDepartment === "All" ? totalAmount : departmentTotals[selectedDepartment] || 0;
 
+  // 🔥 NEW: Department with Most Assets
+  const departmentCounts = assets.reduce((acc, asset) => {
+    acc[asset.department] = (acc[asset.department] || 0) + 1;
+    return acc;
+  }, {});
+  const mostAssetsDept = Object.keys(departmentCounts).reduce((a, b) =>
+    departmentCounts[a] > departmentCounts[b] ? a : b, ""
+  );
+
    // Filter for upcoming warranty/ppm within 30 days
    const today = new Date();
    const nextMonth = new Date();
@@ -81,6 +90,13 @@ const Dashboard = () => {
           <div className="bg-white shadow-lg p-4 rounded-xl border-l-4 border-green-600">
             <h2 className="text-lg font-semibold">Total Amount</h2>
             <p className="text-2xl font-bold mt-2">RM{totalAmount.toLocaleString()}</p>
+          </div>
+          <div className="bg-white shadow-lg p-4 rounded-xl border-l-4 border-purple-600">
+            <h2 className="text-lg font-semibold">Most Assets Dept</h2>
+            <p className="text-base mt-2 text-gray-700">{mostAssetsDept || "N/A"}</p>
+            <p className="text-2xl font-bold text-purple-800 mt-1">
+              {departmentCounts[mostAssetsDept] || 0} Assets
+            </p>
           </div>
         </div>
 

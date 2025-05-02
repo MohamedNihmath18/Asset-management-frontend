@@ -85,16 +85,16 @@ const Dashboard = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
           <div className="bg-white shadow-lg p-4 rounded-xl border-l-4 border-blue-600">
             <h2 className="text-lg font-semibold">Total Assets</h2>
-            <p className="text-2xl font-bold mt-2">{totalAssets}</p>
+            <p className="text-2xl font-bold text-blue-800 mt-2">{totalAssets}</p>
           </div>
           <div className="bg-white shadow-lg p-4 rounded-xl border-l-4 border-green-600">
             <h2 className="text-lg font-semibold">Total Amount</h2>
-            <p className="text-2xl font-bold mt-2">RM{totalAmount.toLocaleString()}</p>
+            <p className="text-2xl font-bold text-green-800 mt-2">RM{totalAmount.toLocaleString()}</p>
           </div>
           <div className="bg-white shadow-lg p-4 rounded-xl border-l-4 border-purple-600">
             <h2 className="text-lg font-semibold">Most Assets Dept</h2>
-            <p className="text-2xl font-bold mt-2">{mostAssetsDept || "N/A"}</p>
-            <p className="text-2xl font-bold mt-2">
+            <p className="text-base mt-2 text-gray-700">{mostAssetsDept || "N/A"}</p>
+            <p className="text-2xl font-bold text-purple-800 mt-1">
               {departmentCounts[mostAssetsDept] || 0} Assets
             </p>
           </div>

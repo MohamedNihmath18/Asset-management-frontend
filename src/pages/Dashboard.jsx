@@ -214,7 +214,7 @@ const Dashboard = () => {
           </div>
         </div>
 
-        {/* Total Equipment Value by Department */}
+        {/* Total Equipment Value by Department
         <div className="mt-8 bg-white shadow-lg p-4 rounded-lg">
           <h2 className="text-xl font-semibold text-gray-700">📊 Total Equipment Value by Department</h2>
           <div className="mt-4">
@@ -232,7 +232,7 @@ const Dashboard = () => {
           <p className="text-2xl font-bold mt-4">RM{filteredAmount.toLocaleString()}</p>
 
           {/* Assets List for Selected Department */}
-          {filteredAssets.length > 0 && (
+          {/* {filteredAssets.length > 0 && (
             <div className="mt-6">
               <h3 className="text-lg font-semibold text-gray-700">
                 Assets in {selectedDepartment} Department
@@ -267,7 +267,81 @@ const Dashboard = () => {
               </div>
             </div>
           )}
-        </div>
+        </div> */} 
+
+        {/* Total Equipment Value by Department */}
+<div className="mt-8 bg-white shadow-lg p-4 rounded-lg">
+  <h2 className="text-xl font-semibold text-gray-700">📊 Total Equipment Value by Department</h2>
+  
+  <div className="mt-4">
+    <select
+      value={selectedDepartment}
+      onChange={(e) => setSelectedDepartment(e.target.value)}
+      className="border border-gray-300 p-2 rounded-md w-full md:w-auto"
+    >
+      <option value="All">All Departments</option>
+      {Object.keys(departmentTotals).map((dept) => (
+        <option key={dept} value={dept}>{dept}</option>
+      ))}
+    </select>
+  </div>
+
+  {/* Total value & count */}
+  <div className="flex flex-col md:flex-row justify-between mt-4 gap-6">
+    <div className="bg-blue-50 p-4 rounded-lg flex-1 shadow-sm">
+      <p className="text-sm text-gray-600 font-medium">Total Equipment Value</p>
+      <p className="text-2xl font-bold text-blue-800 mt-1">
+        RM{filteredAmount.toLocaleString()}
+      </p>
+    </div>
+    <div className="bg-green-50 p-4 rounded-lg flex-1 shadow-sm">
+      <p className="text-sm text-gray-600 font-medium">Number of Equipment</p>
+      <p className="text-2xl font-bold text-green-800 mt-1">
+        {selectedDepartment === "All"
+          ? assets.length
+          : assets.filter((a) => a.department === selectedDepartment).length}
+      </p>
+    </div>
+  </div>
+
+  {/* Assets List for Selected Department */}
+  {filteredAssets.length > 0 && (
+    <div className="mt-6">
+      <h3 className="text-lg font-semibold text-gray-700">
+        Assets in {selectedDepartment} Department
+      </h3>
+      <div className="mt-2 overflow-x-auto bg-gray-50 rounded-md shadow-md">
+        <table className="w-full min-w-[600px] border-collapse border border-gray-300 text-sm md:text-base">
+          <thead>
+            <tr className="bg-blue-600 text-white">
+              <th className="py-2 px-4 text-left">#</th>
+              <th className="py-2 px-4 text-left">Equipment Name</th>
+              <th className="py-2 px-4 text-left">Asset No</th>
+              <th className="py-2 px-4 text-left">Department</th>
+              <th className="py-2 px-4 text-left">Total Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            {filteredAssets.map((asset, index) => (
+              <tr
+                key={asset._id}
+                className="border-b hover:bg-gray-100 cursor-pointer"
+                onClick={() => navigate("/assets")}
+              >
+                <td className="py-2 px-4">{index + 1}</td>
+                <td className="py-2 px-4">{asset.equipmentName}</td>
+                <td className="py-2 px-4">{asset.assetNo}</td>
+                <td className="py-2 px-4">{asset.department}</td>
+                <td className="py-2 px-4">RM{asset.totalAmount}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  )}
+</div>
+
 
         {/* Recent Assets
         <div className="mt-8">

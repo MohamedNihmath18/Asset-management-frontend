@@ -147,7 +147,7 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { PlusCircle, List } from "lucide-react";
+import { PlusCircle, List, BarChart3 } from "lucide-react";
  
 
 const Dashboard = () => {
@@ -271,7 +271,7 @@ const Dashboard = () => {
 
         {/* Total Equipment Value by Department */}
 <div className="mt-8 bg-white shadow-lg p-4 rounded-lg">
-  <h2 className="text-xl font-semibold text-gray-700">📊 Total Equipment Value by Department</h2>
+  <h2 className="text-xl font-semibold text-gray-700 flex items-center gap-2 "><BarChart3 className="text-blue-700" size={22} /> Total Equipment Value by Department</h2>
   
   <div className="mt-4">
     <select

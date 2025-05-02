@@ -93,8 +93,8 @@ const Dashboard = () => {
           </div>
           <div className="bg-white shadow-lg p-4 rounded-xl border-l-4 border-purple-600">
             <h2 className="text-lg font-semibold">Most Assets Dept</h2>
-            <p className="text-base mt-2 text-gray-700">{mostAssetsDept || "N/A"}</p>
-            <p className="text-2xl font-bold text-purple-800 mt-1">
+            <p className="text-2xl font-bold mt-2">{mostAssetsDept || "N/A"}</p>
+            <p className="text-2xl font-bold mt-2">
               {departmentCounts[mostAssetsDept] || 0} Assets
             </p>
           </div>

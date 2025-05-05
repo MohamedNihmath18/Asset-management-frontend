@@ -107,8 +107,8 @@ function Layout() {
         {/* Only show Sidebar if not on the login page */}
         {!isLoginPage && <Sidebar />}
 
-        {/* <main className="flex-1 bg-gray-100 p-6 "> */}
-        <main className="ml-16 md:ml-64 transition-all duration-300 p-4">
+        <main className="flex-1 bg-gray-100 p-6 ">
+        {/* <main className="ml-16 md:ml-64 transition-all duration-300 p-4"> */}
           <Routes>
             <Route path="/login" element={<Login />} />
             <Route path="/" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />

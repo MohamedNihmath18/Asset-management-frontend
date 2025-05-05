@@ -57,7 +57,6 @@ import {
   Calendar,
   FileText,
   HardDrive,
-  Wrench,
 } from "lucide-react";
 
 const Sidebar = () => {
@@ -74,9 +73,9 @@ const Sidebar = () => {
 
   return (
     <div
-      className={`h-full bg-gray-800 text-white transition-all duration-300 z-50 ${
+      className={`fixed top-0 left-0 h-screen bg-gray-800 text-white transition-all duration-300 ${
         isOpen ? "w-64" : "w-16"
-      }`}
+      } z-50`}
       onMouseEnter={() => setIsOpen(true)}
       onMouseLeave={() => setIsOpen(false)}
     >
@@ -88,10 +87,10 @@ const Sidebar = () => {
           {menuItems.map((item) => (
             <li
               key={item.label}
-              className="flex items-center gap-3 py-3 px-4 rounded-lg bg-gray-700 hover:bg-gray-600 cursor-pointer transition duration-200"
+              className="flex items-center gap-3 py-2 px-3 rounded-md hover:bg-gray-700 cursor-pointer"
               onClick={() => navigate(item.path)}
             >
-              {item.icon}
+              <span className="text-white">{item.icon}</span>
               {isOpen && <span>{item.label}</span>}
             </li>
           ))}

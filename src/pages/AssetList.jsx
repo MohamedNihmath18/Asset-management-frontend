@@ -5,7 +5,7 @@
 // import { Trash2, Eye } from "lucide-react";
 // import * as XLSX from "xlsx";
 // import { saveAs } from "file-saver";
- 
+
 
 // const AssetList = () => {
 //   const navigate = useNavigate();
@@ -69,12 +69,12 @@
 //   const filteredAssets = assets.filter((asset) =>
 //     asset[searchField]?.toString().toLowerCase().includes(searchTerm.toLowerCase()) // ✅ Convert to string
 //   );
-  
+
 
 //   return (
 //     <div className="p-4 md:p-6 max-w-5xl mx-auto">
 //       <div className="flex flex-col md:flex-row md:justify-between md:items-center mb-4 gap-3">
-       
+
 //         <h1 className="text-2xl md:text-3xl font-bold text-blue-700">Asset List</h1>
 //         <button
 //           onClick={handleExportToExcel}
@@ -241,6 +241,12 @@ const AssetList = () => {
     <div className="p-4 md:p-6 max-w-5xl mx-auto">
       <div className="flex flex-col md:flex-row md:justify-between md:items-center mb-4 gap-3">
         <h1 className="text-2xl md:text-3xl font-bold text-blue-700">Asset List</h1>
+        <button
+          onClick={() => navigate("/bulk-upload")}
+          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition duration-150"
+        >
+          Bulk Upload
+        </button>
         <button
           onClick={handleExportToExcel}
           className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition duration-150"

@@ -224,6 +224,19 @@ const AssetList = () => {
     asset[searchField]?.toString().toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  const getStatusColor = (status) => {
+    switch (status) {
+      case "Available":
+        return "text-green-600 font-semibold";
+      case "Under Maintenance":
+        return "text-orange-500 font-semibold";
+      case "Disposed":
+        return "text-red-600 font-semibold";
+      default:
+        return "text-gray-500";
+    }
+  };
+
   return (
     <div className="p-4 md:p-6 max-w-5xl mx-auto">
       <div className="flex flex-col md:flex-row md:justify-between md:items-center mb-4 gap-3">

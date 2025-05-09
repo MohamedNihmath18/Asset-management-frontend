@@ -92,6 +92,10 @@ import Warranty from "./pages/Warranty";
 import ServiceReport from "./pages/ServiceReport";
 import Ppm from "./pages/Ppm";
 import Sidebar from "./pages/Sidebar";
+import BulkUpload from "./pages/BulkUpload";
+
+
+
 
 function Layout() {
   const location = useLocation();
@@ -116,6 +120,7 @@ function Layout() {
             <Route path="/assets" element={<ProtectedRoute><AssetList /></ProtectedRoute>} />
             <Route path="/edit-asset/:id" element={<ProtectedRoute><EditAsset /></ProtectedRoute>} />
             <Route path="/asset/:id" element={<ProtectedRoute><AssetDetails /></ProtectedRoute>} />
+            <Route path="/bulk-upload" element={<ProtectedRoute><BulkUpload /></ProtectedRoute>} />
             <Route path="/warranty" element={<Warranty />} />
             <Route path="/service-report" element={<ServiceReport />} />
             <Route path="/ppm" element={<Ppm />} />

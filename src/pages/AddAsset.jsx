@@ -33,6 +33,7 @@ const AddAsset = () => {
     purposeOfEquipment: "",
     requestedBy: "",
     equipmentType: "critical",
+    status: "Available",
     testingCommissioning: null,
     serviceReports: null,
     ppm: null,
@@ -136,6 +137,23 @@ const AddAsset = () => {
             </select>
           </div>
         </div>
+
+         {/* Asset Status */}
+         <div>
+            <label className="block font-medium">Asset Status</label>
+            <select
+              name="status"
+              value={formData.status}
+              onChange={handleChange}
+              className="w-full border p-2 rounded-md focus:ring focus:ring-blue-200"
+              required
+            >
+              <option value="Available">✅ Available</option>
+              <option value="Under Maintenance">🔧 Under Maintenance</option>
+              <option value="Disposed">❌ Disposed</option>
+            </select>
+          </div>
+        
 
         
 

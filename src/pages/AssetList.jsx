@@ -246,6 +246,7 @@ const AssetList = () => {
           <option value="assetNo">Asset No</option>
           <option value="department">Department</option>
           <option value="equipmentType">Equipment Type</option>
+          <option value="status">Status</option>
         </select>
         <input
           type="text"
@@ -267,6 +268,7 @@ const AssetList = () => {
                 <th className="border p-2">Asset No</th>
                 <th className="border p-2">Department</th>
                 <th className="border p-2">Equipment Type</th>
+                <th className="border p-2">Status</th>
                 <th className="border p-2">Actions</th>
               </tr>
             </thead>
@@ -278,6 +280,9 @@ const AssetList = () => {
                     <td className="border p-2">{asset.assetNo}</td>
                     <td className="border p-2">{asset.department}</td>
                     <td className="border p-2">{asset.equipmentType || "N/A"}</td>
+                    <td className={`border p-2 ${getStatusColor(asset.status)}`}>
+                      {asset.status || "N/A"}
+                    </td>
                     <td className="border p-2 flex items-center justify-center gap-2 md:gap-4">
                       <button
                         onClick={() => navigate(`/asset/${asset._id}`)}

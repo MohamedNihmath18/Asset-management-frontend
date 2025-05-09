@@ -31,6 +31,8 @@ const EditAsset = () => {
     drInchargeName: "",
     purposeOfEquipment: "",
     requestedBy: "",
+    equipmentType: "critical",
+    status: "Available", // ✅ Default value added
     testingCommissioning: null,
     serviceReports: null,
     ppm: null,
@@ -188,6 +190,22 @@ const EditAsset = () => {
             >
               <option value="critical">Critical</option>
               <option value="non-critical">Non-Critical</option>
+            </select>
+          </div>
+
+           {/* ✅ Status Field */}
+           <div>
+            <label className="block text-gray-700">Asset Status</label>
+            <select
+              name="status"
+              value={formData.status}
+              onChange={handleChange}
+              className="w-full border p-2 rounded-md"
+              required
+            >
+              <option value="Available">✅ Available</option>
+              <option value="Under Maintenance">🔧 Under Maintenance</option>
+              <option value="Disposed">❌ Disposed</option>
             </select>
           </div>
           

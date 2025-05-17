@@ -49,7 +49,7 @@ const ServiceReport = () => {
               <th className="py-2 px-4 text-left">Equipment Name</th>
               <th className="py-2 px-4 text-left">Asset No</th>
               <th className="py-2 px-4 text-left">Department</th>
-              <th className="py-2 px-4 text-left">Service Report</th>
+              <th className="py-2 px-4 text-left">Service Reports</th>
             </tr>
           </thead>
           <tbody>
@@ -60,7 +60,7 @@ const ServiceReport = () => {
                   <td className="py-2 px-4">{asset.equipmentName}</td>
                   <td className="py-2 px-4">{asset.assetNo}</td>
                   <td className="py-2 px-4">{asset.department}</td>
-                  <td className="py-2 px-4">
+                  {/* <td className="py-2 px-4">
                     {asset.documents?.serviceReports ? (
                       <a
                         href={asset.documents.serviceReports}
@@ -73,7 +73,27 @@ const ServiceReport = () => {
                     ) : (
                       <span className="text-gray-400 italic">No Report</span>
                     )}
-                  </td>
+                  </td> */}
+
+                  <td className="py-2 px-4 space-y-1">
+  {Array.isArray(asset.documents?.serviceReports) && asset.documents.serviceReports.length > 0 ? (
+    asset.documents.serviceReports.map((url, idx) => (
+      <div key={idx}>
+        <a
+          href={url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-blue-600 underline"
+        >
+          View Report {idx + 1}
+        </a>
+      </div>
+    ))
+  ) : (
+    <span className="text-gray-400 italic">No Report</span>
+  )}
+</td>
+
                 </tr>
               ))
             ) : (

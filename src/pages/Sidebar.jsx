@@ -1,97 +1,46 @@
-// // Sidebar.jsx
-// import React from "react";
-// import { useNavigate } from "react-router-dom";
-// import { LayoutDashboard, Calendar, FileText, HardDrive, Wrench } from "lucide-react";
-
-// const Sidebar = () => {
-//   const navigate = useNavigate();
-
-//   return (
-      
- 
-// <div className="w-64 min-h-screen bg-gray-800 text-white p-6">
-//       {/* <h2 className="text-xl font-bold mb-6">Asset Management</h2> */}
-//       <ul className="space-y-3">
-//         <li
-//           className="py-3 px-4 rounded-lg bg-gray-700 hover:bg-gray-600 cursor-pointer transition duration-200"
-//           onClick={() => navigate("/")}
-//         >
-//          <LayoutDashboard size={20} /> Dashboard
-//         </li>
-//         <li
-//           className="py-3 px-4 rounded-lg bg-gray-700 hover:bg-gray-600 cursor-pointer transition duration-200"
-//           onClick={() => navigate("/warranty")}
-//         >
-//           <Calendar size={20} />Warranty End Date
-//         </li>
-//         <li
-//           className="py-3 px-4 rounded-lg bg-gray-700 hover:bg-gray-600 cursor-pointer transition duration-200"
-//           onClick={() => navigate("/ppm")}
-//         >
-//           <Calendar size={20} />PPM End Date
-//         </li>
-//         <li
-//           className="py-3 px-4 rounded-lg bg-gray-700 hover:bg-gray-600 cursor-pointer transition duration-200"
-//           onClick={() => navigate("/service-report")}
-//         >
-//           <FileText size={20} />Service Report
-//         </li>
-//         <li
-//           className="py-3 px-4 rounded-lg bg-gray-700 hover:bg-gray-600 cursor-pointer transition duration-200"
-//           onClick={() => navigate("/assets")}
-//         >
-//           <HardDrive size={20} />Assets
-//         </li>
-//       </ul>
-//     </div>
-//   );
-// };
-
-// export default Sidebar;
-
 // Sidebar.jsx
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { LayoutDashboard, Calendar, FileText, HardDrive } from "lucide-react";
+import { LayoutDashboard, Calendar, FileText, HardDrive, Wrench } from "lucide-react";
 
 const Sidebar = () => {
   const navigate = useNavigate();
 
   return (
-    <div
-      className="w-64 fixed top-16 left-0 bottom-0 bg-gray-800 text-white p-6 overflow-y-auto"
-      style={{ zIndex: 40 }}
-    >
+      
+ 
+<div className="w-64 min-h-screen bg-gray-800 text-white p-6">
+      {/* <h2 className="text-xl font-bold mb-6">Asset Management</h2> */}
       <ul className="space-y-3">
         <li
-          className="py-3 px-4 rounded-lg bg-gray-700 hover:bg-gray-600 cursor-pointer transition duration-200 flex items-center gap-2"
+          className="py-3 px-4 rounded-lg bg-gray-700 hover:bg-gray-600 cursor-pointer transition duration-200"
           onClick={() => navigate("/")}
         >
-          <LayoutDashboard size={20} /> Dashboard
+         <LayoutDashboard size={20} /> Dashboard
         </li>
         <li
-          className="py-3 px-4 rounded-lg bg-gray-700 hover:bg-gray-600 cursor-pointer transition duration-200 flex items-center gap-2"
+          className="py-3 px-4 rounded-lg bg-gray-700 hover:bg-gray-600 cursor-pointer transition duration-200"
           onClick={() => navigate("/warranty")}
         >
-          <Calendar size={20} /> Warranty End Date
+          <Calendar size={20} />Warranty End Date
         </li>
         <li
-          className="py-3 px-4 rounded-lg bg-gray-700 hover:bg-gray-600 cursor-pointer transition duration-200 flex items-center gap-2"
+          className="py-3 px-4 rounded-lg bg-gray-700 hover:bg-gray-600 cursor-pointer transition duration-200"
           onClick={() => navigate("/ppm")}
         >
-          <Calendar size={20} /> PPM End Date
+          <Calendar size={20} />PPM End Date
         </li>
         <li
-          className="py-3 px-4 rounded-lg bg-gray-700 hover:bg-gray-600 cursor-pointer transition duration-200 flex items-center gap-2"
+          className="py-3 px-4 rounded-lg bg-gray-700 hover:bg-gray-600 cursor-pointer transition duration-200"
           onClick={() => navigate("/service-report")}
         >
-          <FileText size={20} /> Service Report
+          <FileText size={20} />Service Report
         </li>
         <li
-          className="py-3 px-4 rounded-lg bg-gray-700 hover:bg-gray-600 cursor-pointer transition duration-200 flex items-center gap-2"
+          className="py-3 px-4 rounded-lg bg-gray-700 hover:bg-gray-600 cursor-pointer transition duration-200"
           onClick={() => navigate("/assets")}
         >
-          <HardDrive size={20} /> Assets
+          <HardDrive size={20} />Assets
         </li>
       </ul>
     </div>
@@ -100,3 +49,4 @@ const Sidebar = () => {
 
 export default Sidebar;
 
+ 
